@@ -1,0 +1,50 @@
+John,Doe,Male,1985-08-15,Engineering,Software Engineer,75000,john@example.com,hashed_password_123,555-123-4567,123 Main St,Anytown,CA,12345
+Jane,Smith,Female,1990-03-22,Marketing,Marketing Manager,85000,jane@example.com,hashed_password_456,555-987-6543,456 Elm St,Anothercity,NY,54321
+Michael,Johnson,Male,1978-11-10,HR,HR Manager,95000,michael@example.com,hashed_password_789,555-555-5555,789 Oak St,Someville,TX,67890
+Emily,Brown,Female,1995-02-18,Engineering,Junior Developer,60000,emily@example.com,hashed_password_abc,555-111-2222,789 Maple Ave,Yourtown,IL,45678
+William,Miller,Male,1992-06-05,Finance,Accountant,70000,william@example.com,hashed_password_def,555-444-3333,987 Pine Rd,Hisville,OH,56789
+Olivia,Wilson,Female,1988-09-30,Marketing,Graphic Designer,60000,olivia@example.com,hashed_password_ghi,555-222-3333,654 Birch Ln,Herstown,WA,67890
+Sophia,Jones,Female,1993-12-07,Engineering,Senior Developer,90000,sophia@example.com,hashed_password_jkl,555-777-8888,321 Cedar St,Theirville,CA,78901
+Mason,Allen,Male,1989-04-25,Finance,Financial Analyst,65000,mason@example.com,hashed_password_mno,555-123-7890,987 Willow Rd,Anotherville,TX,90123
+Ella,Lee,Female,1998-11-30,HR,Recruiter,60000,ella@example.com,hashed_password_pqr,555-999-3333,234 Elm St,Yourcity,CA,56789
+Liam,Garcia,Male,1994-07-12,Marketing,Content Specialist,55000,liam@example.com,hashed_password_stu,555-666-7777,345 Oak Ave,Theirland,IL,23456
+Ava,Ramirez,Female,1991-10-03,Engineering,DevOps Engineer,80000,ava@example.com,hashed_password_vwx,555-444-5555,456 Cedar Ln,Anycity,WA,3456
+Lucas,Harris,Male,1987-03-17,HR,Compensation Analyst,62000,lucas@example.com,hashed_password_xyz,555-345-6789,567 Pine St,Hertown,TX,78901
+Sophia,Butler,Female,1997-08-08,Engineering,QA Engineer,67000,sophia@example.com,hashed_password_123,555-456-7890,678 Maple Ave,Yourville,CA,89012
+Liam,Hall,Male,1990-01-28,Finance,Financial Analyst,73000,liam@example.com,hashed_password_456,555-567-8901,789 Elm St,Anothertown,NY,90123
+Ella,Adams,Female,1996-09-02,Marketing,Social Media Manager,60000,ella@example.com,hashed_password_789,555-678-9012,890 Oak Rd,Thisville,WA,01234
+Jacob,Collins,Male,1993-05-15,Engineering,System Architect,85000,jacob@example.com,hashed_password_345,555-789-0123,1234 Birch Ln,Heretown,CA,23456
+Sophia,Murphy,Female,1986-11-20,HR,HR Coordinator,55000,sophia@example.com,hashed_password_567,555-123-8901,5678 Maple Rd,Anycity,NY,34567
+William,Watson,Male,1995-03-12,Marketing,Content Manager,70000,william@example.com,hashed_password_789,555-234-5678,7890 Oak St,Theirland,WA,45678
+Emma,Bell,Female,1991-09-05,Engineering,Data Analyst,63000,emma@example.com,hashed_password_901,555-345-6789,9012 Elm Ave,Yourtown,CA,56789
+Sophia,Williams,Female,1991-10-08,Engineering,Backend Developer,72000,sophia.w@example.com,hashed_password_xyz,555-123-9876,543 Cedar Ave,Theirville,CA,34567
+Elijah,Smith,Male,1997-03-15,Finance,Financial Manager,90000,elijah.smith@example.com,hashed_password_123,555-987-6543,765 Oak St,Hisville,OH,56789
+Emma,Johnson,Female,1994-09-18,HR,HR Specialist,62000,emma.j@example.com,hashed_password_456,555-555-5555,890 Elm Rd,Yourville,IL,67890
+Liam,Garcia,Male,1993-06-28,Engineering,Lead Developer,105000,liam.g@example.com,hashed_password_789,555-111-2222,321 Pine Ln,Mytown,CA,12345
+Oliver,Anderson,Male,1999-01-04,Marketing,Content Writer,50000,oliver.and@example.com,hashed_password_abc,555-444-3333,654 Oak Ave,Anothercity,NY,54321
+Ava,Thompson,Female,1996-11-22,Finance,Accountant,75000,ava.t@example.com,hashed_password_def,555-222-3333,987 Maple St,Herstown,WA,67890
+Ethan,Hernandez,Male,1986-12-30,Engineering,DevOps Engineer,88000,ethan.h@example.com,hashed_password_ghi,555-777-8888,765 Birch Rd,Theirville,TX,78901
+Isabella,Jones,Female,1983-05-09,Engineering,Product Manager,95000,isabella.j@example.com,hashed_password_jkl,555-666-7777,543 Elm Ln,Yourtown,CA,89012
+Lucas,Garcia,Male,1990-04-17,HR,HR Coordinator,60000,lucas.g@example.com,hashed_password_mno,555-999-0000,123 Pine Ave,Someville,OH,12345
+Eleanor,Parker,Female,1987-06-11,Engineering,Backend Developer,76000,eleanor.p@example.com,hashed_password_xyz,555-234-5678,543 Maple Ave,Theirville,CA,34567
+Gabriel,Ramirez,Male,1994-02-28,Finance,Financial Analyst,89000,gabriel.r@example.com,hashed_password_123,555-987-6543,765 Elm St,Hisville,OH,56789
+Sophie,Allen,Female,1992-10-03,HR,HR Manager,68000,sophie.a@example.com,hashed_password_456,555-555-5555,890 Oak Rd,Yourville,IL,67890
+Ethan,Green,Male,1990-07-18,Engineering,Senior Developer,105000,ethan.g@example.com,hashed_password_789,555-111-2222,321 Pine Ln,Mytown,CA,12345
+Aria,Barnes,Female,1998-12-02,Marketing,Content Writer,52000,aria.b@example.com,hashed_password_abc,555-444-3333,654 Oak Ave,Anothercity,NY,54321
+Mason,Johnson,Male,1995-09-21,Finance,Accountant,78000,mason.j@example.com,hashed_password_def,555-222-3333,987 Maple St,Herstown,WA,67890
+Zoe,Evans,Female,1986-04-14,Engineering,DevOps Engineer,91000,zoe.e@example.com,hashed_password_ghi,555-777-8888,765 Birch Rd,Theirville,TX,78901
+Nathan,King,Male,1991-01-29,Engineering,Product Manager,96000,nathan.k@example.com,hashed_password_jkl,555-666-7777,543 Elm Ln,Yourtown,CA,89012
+Emily,Garcia,Female,1997-11-17,HR,HR Coordinator,63000,emily.g@example.com,hashed_password_mno,555-999-0000,123 Pine Ave,Someville,OH,12345
+Eleanor,Parker,Female,1987-06-11,Engineering,Backend Developer,76000,eleanor.p@example.com,hashed_password_xyz,555-234-5678,543 Maple Ave,Theirville,CA,34567
+Gabriel,Ramirez,Male,1994-02-28,Finance,Financial Analyst,89000,gabriel.r@example.com,hashed_password_123,555-987-6543,765 Elm St,Hisville,OH,56789
+Sophie,Allen,Female,1992-10-03,HR,HR Manager,68000,sophie.a@example.com,hashed_password_456,555-555-5555,890 Oak Rd,Yourville,IL,67890
+Ethan,Green,Male,1990-07-18,Engineering,Senior Developer,105000,ethan.g@example.com,hashed_password_789,555-111-2222,321 Pine Ln,Mytown,CA,12345
+Aria,Barnes,Female,1998-12-02,Marketing,Content Writer,52000,aria.b@example.com,hashed_password_abc,555-444-3333,654 Oak Ave,Anothercity,NY,54321
+Mason,Johnson,Male,1995-09-21,Finance,Accountant,78000,mason.j@example.com,hashed_password_def,555-222-3333,987 Maple St,Herstown,WA,67890
+Zoe,Evans,Female,1986-04-14,Engineering,DevOps Engineer,91000,zoe.e@example.com,hashed_password_ghi,555-777-8888,765 Birch Rd,Theirville,TX,78901
+Nathan,King,Male,1991-01-29,Engineering,Product Manager,96000,nathan.k@example.com,hashed_password_jkl,555-666-7777,543 Elm Ln,Yourtown,CA,89012
+Emily,Garcia,Female,1997-11-17,HR,HR Coordinator,63000,emily.g@example.com,hashed_password_mno,555-999-0000,123 Pine Ave,Someville,OH,12345
+Emma,Rogers,Female,1989-05-08,Engineering,Data Scientist,78000,emma.r@example.com,hashed_password_xyz,555-123-9876,543 Cedar Ave,Theirville,CA,34567
+Lucas,Cook,Male,1996-09-25,Finance,Financial Analyst,93000,lucas.c@example.com,hashed_password_123,555-987-6543,765 Oak St,Hisville,OH,56789
+Avery,Hall,Female,1993-03-14,HR,HR Manager,67000,avery.h@example.com,hashed_password_456,555-555-5555,890 Elm Rd,Yourville,IL,67890
+Olivia,Wright,Female,1991-11-01,Engineering,Lead Developer,107000,olivia.w@example.com,hashed_password_789,555-111-2222,321 Pine Ln,Mytown,CA,12345
