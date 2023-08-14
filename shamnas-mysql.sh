@@ -1,7 +1,15 @@
 start=$(date +%s%3N)
+
+
 DB_USER="root"
+
 DB_PASSWORD="newpassword"
+
 DB_NAME="mydatabase"
+
+ 
+
+
 CSV_FILE="/home/shamnas/Documents/employee_details.csv"
 
 while IFS="," read -r id username email password firstname lastname jobtitle company city state postalcode; do
