@@ -2,16 +2,24 @@
 time1=$(date +%s%3N)
 csv_file="/home/user/Downloads/insert.csv"
 
-
-sql_string=""
-while IFS=, read -r  name city country dob username password age designation
+string=""
+while IFS=, read -r  name city country dob username password age designation #!read file
 do
-   
-  sql_string+="INSERT INTO file( name, city, country, dob, username, password, age, designation) VALUES ('$name', '$city', '$country', '$dob', '$username', '$password', '$age', '$designation');"
-
+string+="('$name', '$city', '$country', '$dob', '$username', '$password', '$age', '$designation'),"   #!stored in variable
 done < "$csv_file"
-echo " $sql_string" |mysql --defaults-file=~/.my.cnf "vinam_data" 
+
+string=$(echo "$string" | sed 's/,$//') #! Remove the trailing comma from string
+
+insert="INSERT INTO file (name, city, country, dob, username, password, age, designation) VALUES $string"
+echo "$insert" |   mysql --defaults-file=~/.my.cnf "vinam_data"
+
+
+
+
 time2=$(date +%s%3N)
-time_taken=$(echo "$time2-$time1" |bc)
-echo $time_taken
+time_taken=$(echo "$time2-$time1" |bc)   #!diffrence in time
+echo $time_taken "ms"
+
+
+
 
