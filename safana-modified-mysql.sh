@@ -8,7 +8,7 @@ do
 string+="('$name', '$city', '$country', '$dob', '$username', '$password', '$age', '$designation'),"   #!stored in variable
 done < "$csv_file"
 
-string=$(echo "$string" | sed 's/,$//') #! Remove the trailing comma from batch_sql
+string=$(echo "$string" | sed 's/,$//') #! Remove the trailing comma from string
 
 insert="INSERT INTO file (name, city, country, dob, username, password, age, designation) VALUES $string"
 echo "$insert" |   mysql --defaults-file=~/.my.cnf "vinam_data"
