@@ -65,6 +65,7 @@ validate_address(){
     return 0
 }
 # Validate date function
+#
 
 validate_date() {
     local date=$1
@@ -202,5 +203,4 @@ end_time=$(date +%s%3N)
 execution_time=$((end_time - start_time))
 echo "Script execution time: $execution_time ms"
 echo "Data inserted successfully."
-
 
