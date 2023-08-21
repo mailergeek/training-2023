@@ -1,7 +1,7 @@
 #!/bin/bash
 
 start_time=$(date +%s%3N)
-batch_size=10
+
 
 generate_data() {
     data=""
