@@ -93,7 +93,6 @@ done
 
 echo "Complete"
 
-
 # SELECT
 #     c.ID,
 #     c.Name,
@@ -101,7 +100,7 @@ echo "Complete"
 #     cd.details->"$.dob" AS DOB,
 #     cd.details->"$.country" AS Country,
 #     cd.details->"$.city" AS City,
-#     COUNT(ca.id) AS TotalActivities
+#     COUNT(ca.contactsid) AS TotalActivities
 # FROM contacts c
 # JOIN contact_activity ca ON c.id = ca.contactsid
 # JOIN contacts_details cd ON c.id = cd.contacts_id
@@ -109,5 +108,5 @@ echo "Complete"
 #   AND ca.ActivityDate >= DATE_SUB(NOW(), INTERVAL 3 MONTH)
 # GROUP BY c.id, cd.details->"$.dob", cd.details->"$.country", cd.details->"$.city"
 # ORDER BY TotalActivities DESC
-# LIMIT 5;
+# LIMIT 10;
 
