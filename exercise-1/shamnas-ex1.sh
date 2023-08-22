@@ -1,6 +1,8 @@
 
 db_name="mydatabase"
 
+start=$(date +%s%3N)
+
 
 namelist=('shamnas' 'arun' 'abhinandh' 'vishnu' 'dona' 'safana' 'jeejo' 'mujeeb' 'safvan' 'hisham' 'raheem' 'anandhan' 'raja' 'kumar' 'rithu' 'bathool' 'hashir' 'veena' 'varun' 'sona' 'madhu' 'kannan' 'kishore' 'muneer')
 domain=('gmail'  'yahoo' 'vinam' 'example')
@@ -53,26 +55,30 @@ generate_random_date(){
 
 }
 
-num=1000
- 
+num=1000000
+
+ j=1
 # insert into contacts table
-for ((i=1;i<=num;i++));do
-	id=$i
-	name=$(generate_name)
+for ((i=1;i<=num;i++));do 
+        
+    
+	    name=$(generate_name)
         email=$(generate_email)
-	mysql --defaults-file=~/.my.cnf -D "$db_name" -e \
-        "INSERT INTO c1 (id, name, email) VALUES ($id, '$name', '$name$((RANDOM))@$email.com');"
+	
+        batch_data+="INSERT INTO contacts (name, email) VALUES ('$name', '$name$((RANDOM))@$email.com');SELECT LAST_INSERT_ID();"
+        batch_data+="SET @result = LAST_INSERT_ID();"
+    
 
 #insert into contact_details_table   
-        contactid=$((i))
+        
         dob="$(generate_random_dob)"
         country=$(generate_country)
-        mysql --defaults-file=~/.my.cnf -D "$db_name" -e \
-        "INSERT INTO c2 (contactid,dob,city,country) VALUES ($contactid, '$dob', '$country$((RANDOM))','$country');"
+        
+        batch_data+="INSERT INTO contact_details (contactid,dob,city,country) VALUES (@result, '$dob', '$country$((RANDOM))','$country');"
         
         
 #insert into contact_activity table
-        contactid=$((i))
+       
         campaign=$(generate_campaign)  
         actvt=$(generate_activity_type)
         date=$(generate_random_date)
@@ -98,18 +104,42 @@ for ((i=1;i<=num;i++));do
                 elif [[ $k -eq 6 && $actvt -eq 7 ]]; then
                       continue
                 else
-                     mysql --defaults-file=~/.my.cnf -D "$db_name" -e \
-                     "INSERT INTO c3 (contactid, campaignid,activitytype,activitydate) VALUES ($contactid, $campaign,$activitytype,'$activitydate');"
+                     
+                batch_data+="INSERT INTO contact_activity (contactid, campaignid,activitytype,activitydate) VALUES (@result, $campaign,$activitytype,'$activitydate');"
                 
                 
                 fi 
- 
-               
-
+            
         done
+        j=$((j+1))
+    if [[ $j -eq 1000 ]]; then
+   
+        mysql --defaults-file=~/.my.cnf -D mydatabase <<EOF
+        START TRANSACTION;
+        $batch_data
+        COMMIT;
+    
+EOF
+    j=1
+    batch_data=""
+    fi
+    
+
+              
        
 done
     
-    
+end=$(date +%s%3N)
+execution_time=$((end - start))
+echo "Execution time: $execution_time ms"
+
+
+# query
+# SELECT campaignid,COUNT(campaignid) as count_open
+# FROM contact_activity
+# WHERE activitytype=3
+# AND activitydate>=date_sub('2023-08-01',INTERVAL 90 DAY)
+# GROUP BY campaignid
+# ORDER BY count_open ASC  
     
     
