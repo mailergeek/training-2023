@@ -4,31 +4,34 @@ array_domain=("gmail.com" "yahoo" "outlook.com")
 array_country=("usa" "india" "china" "uae" "thailand" "uk" "spain" "itali")
 array_length=${#array_letter[@]}
 b=0
-for ((a=0 ; a<20000 ; a++));do 
+data=""
+for ((a=0 ; a<1000000 ; a++));do 
 b=$((b+1))
 echo $a
+        # random name generation
   random_number=$(( (RANDOM % 6) + 1 ))
     for ((i = 0; i < random_number; i++)); do
-        random_index=$(( RANDOM % array_length ))
+        random_index=$(( RANDOM % array_length ))              
         random_character=${array_letter[random_index]}
         name+="${random_character}"
     done
 
-
+    #  random email generation
     random_index1=$(( RANDOM % 3 ))
     random_domain=${array_domain[random_index1]}
     email="$name@$random_domain"
-  
+    # insert query stored in bach_data
     batch_data+="INSERT INTO contact (name, email) VALUES ('$name','$email');"
     batch_data+="SET @id = LAST_INSERT_ID();"
-   
-     name=""
+    #  clrear name and email
+     name=""   
      email=""
 
-
+    # loop to chose 1-10 campaign 
    for ((i = 1; i < 11; i++)); do
     random_number=$(( (RANDOM % 6) + 2 ))
 
+      # loop to chose random campaign activity
      for ((j = 1; j <= random_number; j++)); do
 
    
@@ -47,17 +50,17 @@ echo $a
         activityType=$j
         activityDate="${date[$activityType]}"
 
-       string="(@id, '$campaignID','$activityType','$activityDate'),"
-     
-        
-        
+      #  store values to string variable
+       string+="(@id, '$campaignID','$activityType','$activityDate')," 
      done
-        string=$(echo "$string" | sed 's/,$//') #! Remove the trailing comma from string
-      batch_data+="INSERT INTO contact_activity (contactsID, campaignID, activityType,activityDate )  VALUES $string"
+        
   done
+    # remove last ,
+    string=${string%,} 
+      batch_data+="INSERT INTO contact_activity (contactsID, campaignID, activityType,activityDate )  VALUES $string;"
 
- 
-
+     string=""
+#  generate country
  random_index2=$(( RANDOM % 8 ))
  country=${array_country[random_index2]}
 
@@ -71,12 +74,15 @@ echo $a
 
   if [[ $b -gt 1000 ]]; then
     
- 
+    # mysql insert
     mysql --defaults-file=~/.my.cnf -D vinam_data <<EOF
- START TRANSACTION;
- $batch_data
- COMMIT;
+  START TRANSACTION;
+  $batch_data
+  COMMIT;
 EOF
+# clear bach_data
+ batch_data=""
+
 end_time=$(date +%s%3N)
 execution_time=$((end_time - start_time))
 
@@ -90,3 +96,12 @@ end_time=$(date +%s%3N)
 execution_time=$((end_time - start_time))
 
 echo "Script execution time: $execution_time milliseconds"
+
+
+
+
+# solution
+# SELECT campaignID ,COUNT(activityType) AS count_of_abusive FROM `contact_activity` WHERE activityType=5 AND activityDate >= DATE_SUB(CURRENT_DATE,INTERVAL 3 MONTH)
+# GROUP BY campaignID
+# ORDER BY count_of_abusive DESC
+# LIMIT 5 ;"
