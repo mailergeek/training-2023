@@ -2,7 +2,6 @@
 
 start_time=$(date +%s%3N)
 batch_size=10000
-
 generate_data() {
     data=""
     nested_array=()
