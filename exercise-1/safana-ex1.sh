@@ -1,9 +1,12 @@
+start_time=$(date +%s%3N)
 array_letter=("a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "u" "v" "z")
 array_domain=("gmail.com" "yahoo" "outlook.com")
 array_country=("usa" "india" "china" "uae" "thailand" "uk" "spain" "itali")
 array_length=${#array_letter[@]}
-echo $array_length
-for ((j=0 ; j<1000000 ; j++));do
+b=0
+for ((a=0 ; a<20000 ; a++));do 
+b=$((b+1))
+echo $a
   random_number=$(( (RANDOM % 6) + 1 ))
     for ((i = 0; i < random_number; i++)); do
         random_index=$(( RANDOM % array_length ))
@@ -11,20 +14,14 @@ for ((j=0 ; j<1000000 ; j++));do
         name+="${random_character}"
     done
 
-  echo "$name "
+
     random_index1=$(( RANDOM % 3 ))
     random_domain=${array_domain[random_index1]}
     email="$name@$random_domain"
-    echo "$email"
-    last_inserted_id=$(mysql --defaults-file=~/.my1.cnf "vinam_data" -se "INSERT INTO contact (name, email) VALUES ('$name','$email');  SELECT LAST_INSERT_ID();")
-     
-      result=${last_inserted_id##*)}
-     id=$((result))
-
-    echo "$id"
-
-    
-    
+  
+    batch_data+="INSERT INTO contact (name, email) VALUES ('$name','$email');"
+    batch_data+="SET @id = LAST_INSERT_ID();"
+   
      name=""
      email=""
 
@@ -45,33 +42,51 @@ for ((j=0 ; j<1000000 ; j++));do
           date["6"]="2023-06-17"
           date["7"]="2023-06-22"
 
-        contactID=$id
+        
         campaignID=$i
         activityType=$j
         activityDate="${date[$activityType]}"
 
-       
-        insert_table2="INSERT INTO contact_activity (contactsID, campaignID, activityType,activityDate ) VALUES ('$contactsID', '$campaignID','$activityType','$activityDate');"
-        echo "$insert_table2" |   mysql --defaults-file=~/.my1.cnf "vinam_data"
-        echo "$contactsID.$campaignID.$activityType.$activityDate"
+       string="(@id, '$campaignID','$activityType','$activityDate'),"
+     
+        
+        
      done
+        string=$(echo "$string" | sed 's/,$//') #! Remove the trailing comma from string
+      batch_data+="INSERT INTO contact_activity (contactsID, campaignID, activityType,activityDate )  VALUES $string"
   done
 
  
- contactsID="$last_inserted_id"
+
  random_index2=$(( RANDOM % 8 ))
  country=${array_country[random_index2]}
- echo "$country"
+
  city="$country"."$contactsID"
  random_year=$(( (RANDOM % (2023 - 2022 + 1)) + 2022 ))
  random_month=$(( (RANDOM % 12) + 1 ))
  random_date=$(( (RANDOM % 30) + 1 ))
  DOB="$random_year"."$random_month"."$random_month"
+  batch_data+="INSERT INTO contact_details (contactsID, DOB, city, country) VALUES (@id, '$DOB','$city','$country');"
+ 
 
-  insert_table3="INSERT INTO contact_details (contactsID, DOB, city, country) VALUES ('$contactsID', '$DOB','$city','$country');"
-  echo "$insert_table3" |   mysql --defaults-file=~/.my1.cnf "vinam_data"
-  echo "DOB"
-  
+  if [[ $b -gt 1000 ]]; then
+    
+ 
+    mysql --defaults-file=~/.my.cnf -D vinam_data <<EOF
+ START TRANSACTION;
+ $batch_data
+ COMMIT;
+EOF
+end_time=$(date +%s%3N)
+execution_time=$((end_time - start_time))
+
+echo "Script execution time: $execution_time milliseconds"
+b=0
+fi
+
 done
 
+end_time=$(date +%s%3N)
+execution_time=$((end_time - start_time))
 
+echo "Script execution time: $execution_time milliseconds"
