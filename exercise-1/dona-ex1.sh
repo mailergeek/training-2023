@@ -73,6 +73,7 @@ inc=0
 group=""
 batch_no=0
 
+#looping the data as batches
 for ((i=1; i<=$count; i++)); do
         returned_data=($(contact_data "$i"))
         gen_name="${returned_data[0]}"
@@ -81,7 +82,7 @@ for ((i=1; i<=$count; i++)); do
         campaign="${returned_data[5]}"
         
         result=$(activity)
-
+#appending queries into a variable
     group+="INSERT INTO Contacts (Name, Email) VALUES ('$gen_name', '$gen_email');"
     group+="SET @last_id = LAST_INSERT_ID();"
     group+="INSERT INTO ContactDetails (ContactsID, DataJSON) VALUES (@last_id, '$gen_json');"
@@ -89,6 +90,7 @@ for ((i=1; i<=$count; i++)); do
     
     inc=$((inc+1))  
 
+#using transaction for bulk queries
     if [[ $inc -gt $batch || $i -eq $count ]]; then
         mysql --defaults-file=~/.my.cnf -D campaign <<EOF
 START TRANSACTION;
