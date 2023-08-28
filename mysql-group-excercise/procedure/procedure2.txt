@@ -1,0 +1,19 @@
+BEGIN
+    DECLARE values_list TEXT;
+    DECLARE dynamic_query TEXT;
+    
+    SET values_list = param2;
+    SET @insert_query = CONCAT(
+        'INSERT INTO ContactActivity (ContactsID, CampaignID, ActivityType, ActivityDate) VALUES ',
+        values_list
+    );
+
+    PREPARE stmt FROM @insert_query;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+
+    -- Reset variables
+    SET values_list = NULL;
+    SET dynamic_query = NULL;
+    SET @insert_query = NULL;
+END

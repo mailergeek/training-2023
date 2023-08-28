@@ -1,0 +1,13 @@
+BEGIN
+    DECLARE p_id INT;
+    DECLARE values_list TEXT;
+    DECLARE dynamic_query TEXT;
+
+    -- Insert into contacts table
+    INSERT INTO Contacts (Name, Email, Status) VALUES (name, email, flag);
+    SET @p_id = LAST_INSERT_ID();
+	  -- Insert into contact_details table
+    INSERT INTO ContactDetails (ContactsID, DataJSON) VALUES (@p_id, details);
+
+    CALL Procedure2(@p_id, activity);
+END
