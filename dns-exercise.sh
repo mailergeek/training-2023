@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#!/bin/bash
+
 domain="$1"
 
 log() {
@@ -8,14 +10,14 @@ log() {
 }
 
 # Initialize arrays
-unique_cnames=()
-unique_mx=()
+declare -a unique_cnames=()
+declare -a unique_mx=()
 
 extract_unique_records() {
     local record_type="$1"
-    local records=("${!2}")
-    local unique_array_name="$3"
-
+    local -n records="$2" 
+    local -n unique_array_name="$3"
+#  log "function started"
     for record in "${records[@]}"; do
         if [ -n "$record" ]; then
             num_fields=$(echo "$record" | awk -F. '{print NF}')
@@ -25,25 +27,29 @@ extract_unique_records() {
             fi
 
             # Check if cut_string is not in the respective unique array
-            if  [[ ! " ${unique_array_name[@]} " =~ " $cut_string " ]]; then
+            if [[ ! " ${unique_array_name[@]} " =~ " $cut_string" ]]; then
                 echo "$cut_string"
-                unique_array_name+=("$cut_string")
+                eval "unique_array_name+=("$cut_string")"
             fi
+     
         fi
     done
+  unset -n  unique_array_name
+#   log "function ended"
 }
-
 output=($(curl -s "https://crt.sh/?q=%25.$domain&output=json" | grep -oP '\"name_value\":\"\K.*?(?=\")' | sort -u))
 
+echo "Email tool for $domain:"
+unique_mx=()
+
+ mx+=($(dig +short MX "$domain" 2>/dev/null))
+
+
+ extract_unique_records "MX" mx unique_mx
 echo "Analytical tool for $domain:"
 
 for subdomain in "${output[@]}"; do
-    CNAME_record="$(dig +short CNAME "$subdomain")"
-    extract_unique_records "CNAME" CNAME_record unique_cnames
+    CNAME_record+=($(dig +short CNAME "$subdomain" 2>/dev/null))
 done
-
-echo "Email tool for $domain:"
-
-mx=($(dig +short MX "$domain"))
-
-extract_unique_records "MX" mx unique_mx
+    extract_unique_records "CNAME" CNAME_record unique_cnames
+    unset unique_cnames
