@@ -1,7 +1,6 @@
-#!/bin/bash
 
 #!/bin/bash
-
+time1=$(date +%s)
 domain="$1"
 
 log() {
@@ -39,11 +38,28 @@ extract_unique_records() {
 }
 output=($(curl -s "https://crt.sh/?q=%25.$domain&output=json" | grep -oP '\"name_value\":\"\K.*?(?=\")' | sort -u))
 
+# logging
+
+if [ $? -ne 0 ]; then
+    log "Error occurred during subdomain scanning with curl" >&2
+fi
+trim() {
+    echo "$1" | xargs
+}
+if [ -z "$(trim "${output[@]}")" ]; then 
+    log "No subdomains were found during scanning"
+     exit 1 
+fi
+
 echo "Email tool for $domain:"
 unique_mx=()
 
  mx+=($(dig +short MX "$domain" 2>/dev/null))
+# logging
 
+if [ -z "$(trim "${mx[@]}")"  ]; then 
+    log "No mx were found during scanning"
+fi
 
  extract_unique_records "MX" mx unique_mx
 echo "Analytical tool for $domain:"
@@ -51,5 +67,17 @@ echo "Analytical tool for $domain:"
 for subdomain in "${output[@]}"; do
     CNAME_record+=($(dig +short CNAME "$subdomain" 2>/dev/null))
 done
+#   logging
+if [ -z "$(trim "${mx[@]}")" ]; then 
+    log "No  CNAME_record were found during scanning"
+fi
+
     extract_unique_records "CNAME" CNAME_record unique_cnames
     unset unique_cnames
+
+
+ 
+time2=$(date +%s)
+time_taken=$(echo "$time2-$time1" |bc)   #!diffrence in time
+echo $time_taken "s"
+
