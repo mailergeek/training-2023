@@ -1,4 +1,5 @@
 #!/bin/bash
+
 end_result() {
 
 calculate_activity_date() {
@@ -8,9 +9,7 @@ calculate_activity_date() {
 }
 
 calculate_activity() {
-
     if (($percent <= 80)); then
-
             if (($percent <= 30)); then
                 activity_string+="(@p_id, $i, 1, \"$activity_date\"),"
                 activity_date=$activity_date1
@@ -87,12 +86,12 @@ calculate_activity() {
             fi
             
     else
-            percent=$((1+ RANDOM % 100)) 
-            if (($percent <= 94)); then
+            percent=$((1+ RANDOM % 1000)) 
+            if (($percent <= 940)); then
                 activity_string+="(@p_id, $i, 1, \"$activity_date\"),"
             else
                 flag=0
-                if (($percent <= 96)); then
+                if (($percent <= 960)); then
                     activity_string+="(@p_id, $i, 1, \"$activity_date\"),"
                     activity_date=$activity_date1
                     activity_string+="(@p_id, $i, 3, \"$activity_date\"),"
@@ -100,7 +99,7 @@ calculate_activity() {
                     activity_string+="(@p_id, $i, 4, \"$activity_date\"),"
                     activity_date=$activity_date3
                     activity_string+="(@p_id, $i, 5, \"$activity_date\"),"
-                elif (($percent <= 97)); then
+                elif (($percent <= 970)); then
                     activity_string+="(@p_id, $i, 1, \"$activity_date\"),"
                     activity_date=$activity_date1
                     activity_string+="(@p_id, $i, 3, \"$activity_date\"),"
@@ -108,7 +107,7 @@ calculate_activity() {
                     activity_string+="(@p_id, $i, 4, \"$activity_date\"),"
                     activity_date=$activity_date3
                     activity_string+="(@p_id, $i, 6, \"$activity_date\"),"
-                elif (($percent <= 98)); then
+                elif (($percent <= 980)); then
                     activity_string+="(@p_id, $i, 1, \"$activity_date\"),"
                     activity_date=$activity_date1
                     activity_string+="(@p_id, $i, 3, \"$activity_date\"),"
@@ -127,6 +126,8 @@ calculate_activity() {
 
 generate_data() {
     i=$((i+1))
+    flag=1
+
     if (( $i % 10 == 0 )); then
             activity_datex=$(date -d "$activity_datex + 1 months" +%Y-%m-%d)
             activity_date=$activity_datex
@@ -148,23 +149,13 @@ activity_datex="2023-01-01"
 activity_date1="2023-01-01"
 activity_date2="2023-01-01"
 activity_date3="2023-01-01"
-flag=1
 i=0
+
 activity_string=""
 result="$(generate_data)"
 result="${result%,}"
+
 echo $result
 }
-# if [[ $j -gt $batch_size || $i -eq $count ]]; then
-#         # Uncomment and modify this section if necessary
-#         # mysql --defaults-file=~/.my.cnf -D Task_mysql <<EOF
-#         # START TRANSACTION;
-#         # $sql_query
-#         # COMMIT;
-#         # EOF
-#         j=0
-#         activity_date=$(date -d "$activity_date + 1 months" +%Y-%m-%d)
-#         echo "$activity_string"
-#         activity_string=''
-#         sql_query=''
-#     fi
+# export -f end_result
+# parallel -j 4 end_result :::
